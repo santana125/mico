@@ -10,6 +10,7 @@ import os
 import hashlib
 
 CBOLD = '\33[1m'
+CWHITE = '\33[37m'
 CGREEN = '\33[32m'
 CYELLOW = '\33[33m'
 CBLUE = '\33[34m'
@@ -72,7 +73,9 @@ class Mico():
 
     def search_pkg(self, name):
         packages = self.DB.search_pkg(name)
+        installed = self.get_installed()
         for pkg in packages:
+            is_installed = ""
             if pkg['directory'] == "base":
                 pkg['directory'] = CBOLD + CYELLOW + "base" + ENDC
             elif pkg['directory'] == "dev":
@@ -93,8 +96,20 @@ class Mico():
                 pkg['directory'] = CBOLD + CPURPLE + "x" + ENDC
             elif pkg['directory'] == "xapp":
                 pkg['directory'] = CBOLD + CPURPLE + "xapp" + ENDC
+            if pkg['name'] in installed:
+                is_installed = f"{CBOLD}{CWHITE}installed"
             print(f"{pkg['directory']}/{CBOLD}{pkg['name']}{ENDC}" +
-                  f" {CBLUE}{pkg['version']}{ENDC}")
+                  f" {CBLUE}{pkg['version']} {is_installed}{ENDC}")
+
+    def get_installed(self):
+        files = os.listdir("/var/lib/banana/desc")
+        installed = {}
+        for file in files:
+            desc = file.split('-')
+            name = desc[0]
+            ver = desc[1:]
+            installed[name] = ver
+        return installed
 
     def get_pkg(self, name):
         packages = self.DB.search_pkg(name)
@@ -139,9 +154,9 @@ class Mico():
 
     def show_help(self):
         print('mico -i <pkg_name> to install a package.' +
-            '\nmico -s <pkg_name> to search.' +
-            '\nmico -u to upgrade packages DataBase.' +
-            '\nmico -r to remove a package.')
+              '\nmico -s <pkg_name> to search.' +
+              '\nmico -u to upgrade packages DataBase.' +
+              '\nmico -r to remove a package.')
 
     def run(self, argv):
         pkg_name = ''
