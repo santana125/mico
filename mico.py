@@ -3,7 +3,7 @@
 import requests
 from bs4 import BeautifulSoup
 import sqlite3
-from db import DataBase
+from mico_db import DataBase
 import sys
 import getopt
 import os
