@@ -1,8 +1,11 @@
 # mico
 #### Mico is a helper for the Banana package manager.
 
-## TODO:
+### TODO:
 - [ ] Remove packages.
-- [ ] Check for dependencies
-- [ ] Reduce dependencies (Beautiful Soup :thinking:)
-
+- [ ] Check for package dependencies.
+- [ ] Install package dependencies.
+- [ ] Reduce dependencies (Beautiful Soup :thinking:).
+- [ ] Make a Installer for Mico.
+- [ ] Show \"INSTALLED\" on packages search.
+- [ ] Clear the code.
