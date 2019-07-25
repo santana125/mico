@@ -7,5 +7,5 @@
 - [ ] Install package dependencies.
 - [ ] Reduce dependencies (Beautiful Soup :thinking:).
 - [ ] Make a Installer for Mico.
-- [ ] Show \"INSTALLED\" on packages search.
+- [x] Show \"INSTALLED\" on packages search.
 - [ ] Clear the code.
